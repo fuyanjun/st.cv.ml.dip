@@ -1,3 +1,4 @@
+# SphinxAPI、SphinxQL和SphinxSE的区别
 SPhinxAPI，SPhinxAPI默认提供,php,python,java，这三种言语的API。当然你也可以开发其他语言的API。
 SPhinxAPI使用要用到 一些set，比如设置搜索服务，匹配模式，排序依据，结果返回，分页，获取摘要，高亮等。具体请查看http://www.coreseek.cn/docs/coreseek_4.1-sphinx_2.0.1-beta.html#api-reference
 SPhinxAPI是通过在索引文件里查到符合条件的ID，然后再根据ID在数据源里查到具体的信息，再显示。
@@ -23,3 +24,20 @@ SphinxSE 是一个mysql引擎插件，目前官方提供的是插件补丁是5.0
 SphinxSE只提供查询功能，和API一样。
 使用SphinxSE 需要先建立一个搜索表，引擎当然是新安装的SphinxSE。创建的表的字段也是有要求的，具体的请查看http://www.coreseek.cn/docs/coreseek_4.1-sphinx_2.0.1-beta.html#sphinxse-using
 ShpinxSE的优点就是查询方便。
+
+# access searchd via regular MySQL API (python)
+import _mysql
+db=_mysql.connect(read_default_file="~/.mysql.sphinx.cnf")
+db.get_host_info()    'should print: localhost via TCP/IP'
+db.get_server_info()  'should print the server version info.'
+db.query("SELECT * FROM test1 WHERE MATCH('test')")
+r=db.store_result()
+r.fetch_row()
+
+~/.mysql.sphinx.cnf:
+[client]
+port = 9306
+protocol = TCP
+
+note: when using mysql command line do
+mysql --port 9306 --protocol=TCP
