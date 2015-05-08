@@ -41,3 +41,6 @@ protocol = TCP
 
 note: when using mysql command line do
 mysql --port 9306 --protocol=TCP
+
+# refs:Sphinx API类型以及SphinxSE实现原理分析
+http://blog.csdn.net/jucrazy/article/details/6739162
